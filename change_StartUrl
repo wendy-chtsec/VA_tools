@@ -1,0 +1,31 @@
+import os  
+import os.path  
+import xml.etree.ElementTree as ET
+      
+path="C:/Users/AZ1831/Downloads/test" 
+files=os.listdir(path) and ".xml" in xmlFile: #得到資料夾下所有檔名稱
+s=[]
+for xmlFile in files: #遍歷資料夾
+	if not os.path.isdir(xmlFile): #判斷是否是資料夾，不是資料夾才打開
+		print (xmlFile)
+		
+		#xml讀取操作
+		tree=ET.parse(os.path.join(path,xmlFile))
+		root=tree.getroot()
+		print (root[0][2].text)
+		print (root[0][12].attrib['StartUrl'])
+
+		root[0][2].text=root[0][12].attrib['StartUrl']
+		tree.write(os.path.join(path,xmlFile))      
+'''
+		###獲取標籤對xmin/ymin之間的值
+		StartURL=root.getElementsByTagName('StartURL')
+		Crawler=root.getElementsByTagName('Crawler')
+		
+		for i in range(len(StartURL)):
+			print (StartURL[i].firstChild.data)
+			a = StartURL[i].firstChild.data
+			print(type(a))
+			StartURL[i].firstChild.data=Crawler
+			print (StartURL[i].firstChild.data)
+'''
